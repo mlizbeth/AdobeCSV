@@ -9,11 +9,9 @@ import java.io.IOException;
 
 public class Writer {
 	
-	
-	private Mode mode;
 	private static final String DELIMITER = ",";
 	private String LINE = "";
-	private String inFile = "C:\\Users\\Madeline Kotara\\Downloads\\Students.csv";
+	private String inFile = "";
 	private String outFile = "C:\\Users\\Madeline Kotara\\Desktop\\Test.csv";
 	private BufferedWriter bw;
 	private BufferedReader br;
@@ -27,8 +25,6 @@ public class Writer {
 		if(mode == Mode.FACSTAFF) {
 			e.setProductConfigurations("\"Default All Apps plan - 20 GB configuration\"");
 		}
-		
-		//this.outFile = outFile;
 		
 		try {
 			bw = new BufferedWriter(new FileWriter(outFile, true));
@@ -45,7 +41,6 @@ public class Writer {
 			}
 		} catch (IOException e) {}
 		
-		read(inFile);
 	}
 	
 	public void write() throws IOException {
@@ -72,8 +67,6 @@ public class Writer {
 	public void read(String inFile) {
 		this.inFile = inFile;
 		
-		
-		
 		try {
 			br = new BufferedReader(new FileReader(inFile));
 			while((LINE = br.readLine()) != null ) {
@@ -81,7 +74,6 @@ public class Writer {
 				String[] formattedName = new String[3];
 				for(int x = 0; x < name.length; x++) {
 					formattedName[x] = name[x].substring(name[x].indexOf("\"") + 1, (name[x].lastIndexOf("\"")));
-					//write(formattedName[x], x);
 					if(x == 0) {
 						e.setFirstName(formattedName[x]);
 					}
@@ -103,6 +95,7 @@ public class Writer {
 
 	public void setInFile(String inFile) {
 		this.inFile = inFile;
+		read(inFile);
 	}
 
 	public String getOutFile() {
