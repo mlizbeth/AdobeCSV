@@ -106,5 +106,4 @@ public class Writer {
 		this.outFile = outFile;
 	}
 	
-	
 }

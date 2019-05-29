@@ -61,6 +61,13 @@ public class Main extends Application {
 		primaryStage.setScene(scene);
 		primaryStage.show();
 		
+		studentMode.setOnMouseClicked(e -> {
+			mode = Mode.STUDENT;
+		});
+		
+		staffMode.setOnMouseClicked(e -> {
+			mode = Mode.FACSTAFF;
+		});
 		
 		fileChooser.getExtensionFilters().addAll(new ExtensionFilter("Comma Separated Values", "*.csv"));
 		
@@ -76,7 +83,7 @@ public class Main extends Application {
 						 * TODO
 						 * Read file data and store in HashTable or other viable structure.
 						 */
-						Writer writer = new Writer(Mode.STUDENT);
+						Writer writer = new Writer(mode);
 						writer.setInFile(file.toString());
 					}
 				}
