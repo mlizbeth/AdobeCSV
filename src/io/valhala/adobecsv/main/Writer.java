@@ -12,7 +12,7 @@ public class Writer {
 	private static final String DELIMITER = ",";
 	private String LINE = "";
 	private String inFile = "";
-	private String outFile = "C:\\Users\\Madeline Kotara\\Desktop\\Test.csv";
+	private String outFile = "C:\\Users\\Madeline Kotara\\Desktop\\Out.csv";
 	private BufferedWriter bw;
 	private BufferedReader br;
 	private Entity e = new Entity();
