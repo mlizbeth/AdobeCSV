@@ -1,4 +1,8 @@
 import enum
+from pathlib import Path
+import platform
+
+home_dir = (Path.home())
 
 class Entity:
     first_name = ""
@@ -24,6 +28,9 @@ class Entity:
         self.email = email
         self.product_configurations = product_configurations
 
+    def set_product_configurations(self, product_configurations):
+        self.product_configurations = product_configurations
+
     def __str__(self):
         return f"Entity data \nfirst_name: {self.first_name} \nlast_name: {self.last_name} \nusername: {self.username} \nemail: {self.email} \nproduct_configurations: {self.product_configurations}"
 
@@ -34,6 +41,9 @@ class Mode(enum.Enum):
 
 file_headers = ["Identity Type", "Username", "Domain", "Email", "First Name", "Last Name", "Country Code", "Product Configurations", "Admin Roles", "Product Configurations Administered",
                 "User Groups", "User Groups Administered", "Products Administered", "Developer Access", "Auto Assigned Products"]      
+
+# All Apps plan might need to be changed to 100 GB configuration
+entitlements = ["\"Default All Apps plan - 20 GB configuration\"", "\"Default Spark with Premium Features for Higher-Ed - 2 GB configuration\""]
 
 
 #TODO
