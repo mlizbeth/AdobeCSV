@@ -1,6 +1,7 @@
 import enum
 from pathlib import Path
 import platform
+import csv
 
 home_dir = (Path.home())
 
@@ -16,6 +17,7 @@ class Entity:
     # @Optional Params
     admin_roles = ""
     user_groups = ""
+    product_configurations_administered = ""
     user_groups_administered = ""
     products_administered = ""
     developer_access = ""
@@ -42,11 +44,21 @@ class Mode(enum.Enum):
 file_headers = ["Identity Type", "Username", "Domain", "Email", "First Name", "Last Name", "Country Code", "Product Configurations", "Admin Roles", "Product Configurations Administered",
                 "User Groups", "User Groups Administered", "Products Administered", "Developer Access", "Auto Assigned Products"]      
 
-# All Apps plan might need to be changed to 100 GB configuration
-entitlements = ["\"Default All Apps plan - 20 GB configuration\"", "\"Default Spark with Premium Features for Higher-Ed - 2 GB configuration\""]
+entitlements = ["Default All Apps plan - 1 TB configuration", "Default Spark with Premium Features for Higher-Ed - 2 GB configuration"]
 
+
+
+with open('/Users/maddie/Desktop/out.csv', mode='w') as out_file:
+    with open('/Users/maddie/Desktop/facstaff.csv', mode='r') as in_file:
+        csv_reader = csv.reader(in_file, delimiter=',')
+        csv_writer = csv.writer(out_file, delimiter=',')
+        next(in_file) #we want to skip the first line of the in_file since it contains junk data
+        csv_writer.writerow(file_headers)
+        for row in csv_reader:
+            e = Entity(row[0], row[1], row[2], row[2] + "@trinity.edu", entitlements[0]) #entitlements[1] should be used for students
+            csv_writer.writerow([e.identity_type, e.username, e.domain, e.email, e.first_name, e.last_name, e.country_code, e.product_configurations, e.admin_roles, e.product_configurations_administered, e.user_groups, e.user_groups_administered, e.products_administered, e.developer_access, e.auto_assigned_products])
+            
 
 #TODO
-# Get operation mode
-# Read in_file
-# Write to out_file based on mode  
+# args, kwargs
+# pass in_file, out_file, operation_mode via command line and write the files appropriately
